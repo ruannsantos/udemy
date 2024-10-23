@@ -1,0 +1,106 @@
+Function main
+	Motor On
+	Power High
+	'Parametros de aceleracao normal
+	Speed 100
+	Accel 100, 100
+	'Parametros de aceleracao comando Move
+	SpeedS 2000
+	AccelS 20000, 20000
+	'Parametros de aceleracao para rotacao na garra
+	SpeedR 1000
+	AccelR 5000, 5000
+	
+
+
+
+	'Do
+		Call posi_peca
+		If Sw(8) = 1 Then
+			If Sw(9) = 1 Then
+				If Sw(10) = 1 Then
+				Tool 1
+		Go Aproximacao
+		Move Pega_triangulo -TLZ(50) CP
+		Move Pega_triangulo
+		Wait 1
+		SimSet Robot1.Pick, Triangulo, 1
+		Move Pega_triangulo -TLZ(50) CP
+		Move Aproximacao
+		Tool 2
+		Go Aproxima_pecas
+		Move Aproxima_Cilindro CP
+		Move Pega_cilindro
+		Wait 1
+		SimSet Robot1.Pick, Cylinder_1, 2
+		Move Aproxima_Cilindro CP
+		Move Aproxima_pecas
+		Tool 1
+		Go Aprox_
+		Go Deixa_Tring
+		Wait 1
+		SimSet Robot1.Place, Triangulo
+		Go Aprox_
+		Tool 2
+		JTran 4, -180
+		Go Deixa_cilindro
+		Wait 1
+		SimSet Robot1.Place, Cylinder_1
+		Go Deixa_cilindro +TLZ(-132)
+					
+				EndIf
+			EndIf
+		EndIf
+
+	'Loop
+		
+	
+
+	
+
+Fend
+Function posi_peca
+	
+	'Set da posicao do quadrado'
+	SimSet Quadrado.PositionX, 550
+	SimSet Quadrado.PositionY, 200
+	SimSet Quadrado.PositionZ, 1005
+	
+	'Set da posicao do triangulo'
+	SimSet Triangulo.PositionX, -705
+	SimSet Triangulo.PositionY, 47
+	SimSet Triangulo.PositionZ, 1169
+	SimSet Triangulo.RotationX, 90
+	SimSet Triangulo.RotationZ, 180
+		
+	
+	'Set da posicao do cilindro'
+	SimSet Cylinder_1.PositionX, -587
+	SimSet Cylinder_1.PositionY, 245
+	SimSet Cylinder_1.PositionZ, 1125
+	
+	
+Fend
+Function posi_quad
+	Integer X, Y, Z
+	Do
+		For Y = 200 To -200 Step -2
+			
+			SimSet Quadrado.PositionY, Y
+			If Y = -200 Then
+				Exit For
+				Exit Do
+				
+			EndIf
+			
+		Next
+		
+	Loop
+	
+Fend
+Function setpar
+	
+	SimSet Triangulo.SetParent
+	SimSet Cylinder_1.SetParent
+	
+Fend
