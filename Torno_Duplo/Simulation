@@ -1,0 +1,18 @@
+Function Porta1
+	Int32 abre, fecha
+	
+	For abre = 340 To -360 Step -2
+		SimSet Porta1.PositionY, abre
+	Next
+	
+	If Sw(Torno_fecha) = 1 Then
+	
+	For fecha = -360 To 340 Step 2
+		SimSet Porta1.PositionY, fecha
+	Next
+	Wait 180
+	
+	EndIf
+	
+	
+	
