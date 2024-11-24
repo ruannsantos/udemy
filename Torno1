@@ -1,0 +1,62 @@
+Function Torno1
+	LoadPoints "torno_duplo.pts"
+	
+	
+		'Primeiro Movimento - Sem peca acabada para retirar
+		Tool 1
+		Go Home_pose, Aprox_pega_pilha
+		Move Pega_pilha
+		Wait 0.1
+		Move Aprox_pega_pilha
+		Go Aprox_pilha, Home_pose, Safe_posi, Aproxima_torno
+		Move Coloca_peca
+		Wait 0.1
+		Move Aproxima_torno
+		Go Safe_posi, Home_pose
+		On Porta_torno1
+		On Porta_torno1
+	
+		Tool 1
+		Go Aprox_pilha, Aprox_pega_pilha
+		Move Pega_pilha
+		Wait 0.1
+		Move Aprox_pega_pilha
+		Go Aprox_pilha, Home_pose, Safe_posi '-------- finaliza primeiro ciclo
+	
+	Do While Sw(0) = 1
+		
+	   WaitSig 1
+	   Wait 2
+		Resume Torno1
+		Tool 2
+		Go Aprox_retira_torno
+		Move Retira_peca_acabada
+		Wait 0.1
+		Move Aprox_retira_torno
+		Tool 1
+		Go Aproxima_torno
+		Move Coloca_peca
+		Wait 0.1
+		Move Aproxima_torno
+		Go Safe_posi
+		On Porta_torno1
+		Go Home_pose, Aprox_pilha
+		Tool 2
+		Go Aprox_deixa_pilha
+		Move Deixa_pilha
+		Wait 0.1
+		Move Deixa_pilha
+		Go Aprox_deixa_pilha
+		Tool 1
+		Go Aprox_pilha, Aprox_pega_pilha
+		Move Pega_pilha
+		Wait 0.1
+		Move Pega_pilha
+		Go Aprox_pilha, Home_pose, Safe_posi
+	Loop
+	
+		
+	
+
+	
+Fend
