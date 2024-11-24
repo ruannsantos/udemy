@@ -1,0 +1,52 @@
+'Declarando Variaveis Globais 
+Global Preserve Double g_porta
+'_____________________________________________
+Function main
+	Motor On
+	Power High
+	Xqt Porta1
+	Xqt Torno1
+
+	
+	'LoadPoints "torno_duplo.pts"
+	
+	'Velocidade Padrao GO
+	Speed 100
+	Accel 100, 100
+	
+	'Velocidade Linear 
+	SpeedS 150
+	AccelS 20000, 20000
+	
+	
+	
+Fend
+Function Alimenta_torno
+	
+	Go PontoInicial, Aprox_pega_disco
+	Move Pega_Disco
+	Wait 0.1
+	Move Aprox_pega_disco
+	Go PontoInicial, Entrada_torno, aprox_coloca_disco
+	Move Coloca_Disco
+	Wait 0.1
+	Move aprox_coloca_disco
+	Go Entrada_torno
+	
+	
+	
+		
+Fend
+Function Desalim_torno
+	
+	Go Entrada_torno, aprox_coloca_disco
+	Move Coloca_Disco
+	Wait 0.1
+	Move aprox_coloca_disco
+	Go Entrada_torno, Aprox_Empilha_disco
+	Move Empilha_disco, Aprox_Empilha_disco
+	Go Entrada_torno
+
+	
+	
+Fend
