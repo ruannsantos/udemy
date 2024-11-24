@@ -1,18 +1,43 @@
 Function Porta1
-	Int32 abre, fecha
-	
+	Do While Sw(0) = 1
+		SimGet Porta1.PositionY, g_porta
+		
+		'A Porta esta aberta ou fechada?
+		If g_porta = 340 Then 'Se fechada
+		Print "leitura feita"
+		Call Abre1 'entao abra
+		EndIf
+		
+		If g_porta = -360 Then 'Se aberta
+		
+			Do While Oport(Porta_torno1) = 1
+				If Oport(Porta_torno1) = 1 Then
+				Call Fecha1
+				Off Porta_torno1
+					Exit Do
+				EndIf
+			Loop
+		EndIf
+		
+	Loop
+	 	
+Fend
+'__________________________________________________________________
+Function Abre1
+	Integer abre
 	For abre = 340 To -360 Step -2
 		SimSet Porta1.PositionY, abre
 	Next
-	
-	If Sw(Torno_fecha) = 1 Then
-	
+Fend
+'_______________________________________________________________________
+Function Fecha1
+	Integer fecha
 	For fecha = -360 To 340 Step 2
 		SimSet Porta1.PositionY, fecha
 	Next
-	Wait 180
-	
-	EndIf
+	Wait 60
+	Signal 1
+Fend
 	
 	
 	
